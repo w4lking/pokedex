@@ -23,16 +23,19 @@ Este projeto é uma Pokédex interativa que consome dados da [PokéAPI](https://
 - [Vue Router](https://router.vuejs.org/)
 - [PokéAPI](https://pokeapi.co/)
 
-## 🖼️ Imagens
+## 🔧 Como Rodar o Projeto ou Vizualizar
 
-> 
 
-![preview](./preview.gif)
 
-## 🔧 Como Rodar o Projeto
+Vizualizar no vercel:
 
-Clone o repositório:
+- [PokéAPI](https://pokedex-five-ivory.vercel.app/)
+
+Clonar o repositório:
 
 ```bash
 git clone https://github.com/w4lking/pokedex.git
 cd pokedex
+
+
+
