@@ -8,7 +8,7 @@
 
 ## ✨ Sobre o Projeto
 
-Este projeto é uma Pokédex interativa que consome dados da [PokéAPI](https://pokeapi.co/). Com uma interface bonita e responsiva, é possível visualizar informações detalhadas sobre cada Pokémon, incluindo:
+Este projeto é uma Pokédex interativa que consome dados da [PokéAPI](https://pokeapi.co/). Com uma interface responsiva, é possível visualizar informações detalhadas sobre cada Pokémon, incluindo:
 
 - Imagens (sprites)
 - Movimentos iniciais
