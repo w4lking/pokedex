@@ -1,5 +1,6 @@
 {
   "title": "Pokédex",
+  "back": "← Voltar",
   "loading": "Carregando detalhes...",
   "sprites": "Sprites",
   "moves": "Movimentos",
