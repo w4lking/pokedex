@@ -25,7 +25,7 @@ Este projeto é uma Pokédex interativa que consome dados da [PokéAPI](https://
 
 ## 🖼️ Imagens
 
-> Adicione aqui prints ou gifs da aplicação em funcionamento! Exemplo:
+> 
 
 ![preview](./preview.gif)
 
