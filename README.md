@@ -1,61 +1,38 @@
-# pokedex
+# Pokédex
 
-This template should help get you started developing with Vue 3 in Vite.
+![Vue](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=FFD62E)
+![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 
-## Recommended IDE Setup
+> Uma Pokédex moderna desenvolvida com Vue 3, Vite e a PokéAPI.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## ✨ Sobre o Projeto
 
-## Type Support for `.vue` Imports in TS
+Este projeto é uma Pokédex interativa que consome dados da [PokéAPI](https://pokeapi.co/). Com uma interface bonita e responsiva, é possível visualizar informações detalhadas sobre cada Pokémon, incluindo:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- Imagens (sprites)
+- Movimentos iniciais
+- Jogos em que aparecem
+- Cadeia de evolução
 
-## Customize configuration
+## 🚀 Tecnologias Utilizadas
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- [Vue 3](https://vuejs.org/)
+- [Vite](https://vitejs.dev/)
+- [Axios](https://axios-http.com/)
+- [Vue Router](https://router.vuejs.org/)
+- [PokéAPI](https://pokeapi.co/)
 
-## Project Setup
+## 🖼️ Imagens
 
-```sh
-npm install
-```
+> Adicione aqui prints ou gifs da aplicação em funcionamento! Exemplo:
 
-### Compile and Hot-Reload for Development
+![preview](./preview.gif)
 
-```sh
-npm run dev
-```
+## 🔧 Como Rodar o Projeto
 
-### Type-Check, Compile and Minify for Production
+Clone o repositório:
 
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-npm run test:e2e:dev
-```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+```bash
+git clone https://github.com/w4lking/pokedex.git
+cd pokedex
