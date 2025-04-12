@@ -15,7 +15,7 @@
           class="type"
           :class="'type-' + type.type.name"
         >
-          {{ type.type.name }}
+          {{ getTranslatedType(type.type.name) }}
         </span>
       </div>
     </div>
@@ -23,6 +23,8 @@
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
+
 const props = defineProps({
   pokemon: {
     type: Object,
@@ -31,6 +33,13 @@ const props = defineProps({
 })
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
+
+
+const { t, locale } = useI18n()
+
+const getTranslatedType = (type) => {
+  return locale.value === 'en' ? type : t(`types.${type}`)
+}
 </script>
 
 <style scoped>

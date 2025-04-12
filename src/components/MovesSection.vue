@@ -1,18 +1,25 @@
 <template>
   <section class="section">
-    <h2>Movimentos de Ataque</h2>
+    <h2>{{t('attack_moves')}}</h2>
     <ul class="list">
       <li v-for="move in moves" :key="move.move.name">
-        {{ move.move.name }}
+        {{ t(`moveNames.${move.move.name}`) !== `moveNames.${move.move.name}`
+          ? t(`moveNames.${move.move.name}`)
+          : move.move.name }}
       </li>
     </ul>
   </section>
 </template>
 
 <script setup lang="ts">
+
+import { useI18n } from 'vue-i18n'
+
 defineProps<{
   moves: { move: { name: string } }[]
 }>()
+
+const { t } = useI18n()
 </script>
 
 <style scoped>

@@ -1,6 +1,6 @@
 <template>
   <div class="pokemon-list">
-    <input v-model="search" placeholder="Filtrar por nome ou ID..." />
+    <input v-model="search" :placeholder="t('search')" />
 
     <TransitionGroup name="fade" tag="div" class="grid">
       <router-link
@@ -12,18 +12,21 @@
       >
         <img :src="pokemon.image" alt="pokemon" />
         <p>{{ pokemon.name }}</p>
-        <span class="badge">{{ pokemon.types[0] }}</span>
+        <span class="badge">{{ translateType(pokemon.types[0]) }}</span>
       </router-link>
     </TransitionGroup>
 
-    <div v-if="loading" class="loading">Carregando...</div>
+    <div v-if="loading" class="loading">{{ $t('loading') }}</div>
   </div>
 </template>
-
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
+import { useI18n } from 'vue-i18n'
+import { translateType } from '@/utils/translateType'
+
+const { t } = useI18n()
 
 const pokemons = ref<any[]>([])
 const offset = ref(0)
@@ -69,7 +72,7 @@ const onScroll = () => {
 const filteredPokemons = computed(() => {
   if (!search.value) return pokemons.value
   const s = search.value.toLowerCase()
-  return pokemons.value.filter((p) => p.name.includes(s) || String(p.id).includes(s))
+  return pokemons.value.filter((p) => p.name.includes(s) || String(p.id).includes(s)) 
 })
 </script>
 
@@ -121,7 +124,9 @@ input:focus {
   padding: 1rem;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .card:hover {
@@ -178,17 +183,52 @@ input:focus {
 }
 
 /* Estilo baseado nos tipos */
-.card.fire      { background-color: #fddfdf; border: 2px solid #fba69a; }
-.card.water     { background-color: #def3fd; border: 2px solid #7ac5ff; }
-.card.grass     { background-color: #defde0; border: 2px solid #80e572; }
-.card.electric  { background-color: #fcf7de; border: 2px solid #ffe564; }
-.card.ice       { background-color: #e0f5ff; border: 2px solid #a0e6ff; }
-.card.dragon    { background-color: #e6e0ff; border: 2px solid #b39eff; }
-.card.psychic   { background-color: #fceaff; border: 2px solid #e09eff; }
-.card.normal    { background-color: #f4f4f4; border: 2px solid #ccc; }
-.card.bug       { background-color: #f8fbd4; border: 2px solid #dbe57b; }
-.card.rock      { background-color: #eae0c2; border: 2px solid #c1a76f; }
-.card.ghost     { background-color: #e8e2f8; border: 2px solid #a99ecf; }
-.card.fighting  { background-color: #fddede; border: 2px solid #ff9b9b; }
-
+.card.fire {
+  background-color: #fddfdf;
+  border: 2px solid #fba69a;
+}
+.card.water {
+  background-color: #def3fd;
+  border: 2px solid #7ac5ff;
+}
+.card.grass {
+  background-color: #defde0;
+  border: 2px solid #80e572;
+}
+.card.electric {
+  background-color: #fcf7de;
+  border: 2px solid #ffe564;
+}
+.card.ice {
+  background-color: #e0f5ff;
+  border: 2px solid #a0e6ff;
+}
+.card.dragon {
+  background-color: #e6e0ff;
+  border: 2px solid #b39eff;
+}
+.card.psychic {
+  background-color: #fceaff;
+  border: 2px solid #e09eff;
+}
+.card.normal {
+  background-color: #f4f4f4;
+  border: 2px solid #ccc;
+}
+.card.bug {
+  background-color: #f8fbd4;
+  border: 2px solid #dbe57b;
+}
+.card.rock {
+  background-color: #eae0c2;
+  border: 2px solid #c1a76f;
+}
+.card.ghost {
+  background-color: #e8e2f8;
+  border: 2px solid #a99ecf;
+}
+.card.fighting {
+  background-color: #fddede;
+  border: 2px solid #ff9b9b;
+}
 </style>

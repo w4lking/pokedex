@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <h2>Presente nos Jogos</h2>
+    <h2>{{t('present_at_games')}}</h2>
     <ul class="list">
       <li v-for="(game, index) in games" :key="index">
         {{ game.version.name }}
@@ -10,9 +10,14 @@
 </template>
 
 <script setup lang="ts">
+
+import { useI18n } from 'vue-i18n'
 defineProps<{
   games: { version: { name: string } }[]
 }>()
+
+const { t } = useI18n()
+
 </script>
 
 <style scoped>

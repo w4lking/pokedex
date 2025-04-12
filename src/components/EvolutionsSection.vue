@@ -1,6 +1,6 @@
 <template>
   <section class="section" v-if="evolutions.length">
-    <h2>Evoluções</h2>
+    <h2>{{t('evolutions')}}</h2>
     <ul class="evo-list">
       <li
         v-for="evo in evolutions"
@@ -11,13 +11,14 @@
       </li>
     </ul>
     <p v-if="isFinal" class="final-msg">
-      Este Pokémon está na forma final de evolução ✅
+      {{t('final_form')}} ✅
     </p>
   </section>
 </template>
 
 <script setup>
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
   evolutions: Array,
@@ -27,6 +28,8 @@ const props = defineProps({
 const isFinal = computed(() =>
   props.evolutions.length ? props.currentPokemon === props.evolutions.at(-1) : false
 )
+
+const { t } = useI18n()
 </script>
 
 <style scoped>

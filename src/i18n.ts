@@ -1,17 +1,12 @@
+// src/i18n.ts
 import { createI18n } from 'vue-i18n'
-import pt from './locations/pt.json'
-import en from './locations/en.json'
-import es from './locations/es.json'
+import messages from './i18n/index.ts' // Importa o objeto diretamente
 
 const i18n = createI18n({
   legacy: false,
-  locale: localStorage.getItem('lang') || 'pt',
-  fallbackLocale: 'pt',
-  messages: {
-    pt,
-    en,
-    es
-  }
+  locale: 'pt',
+  fallbackLocale: 'en',
+  messages,
 })
 
 export default i18n

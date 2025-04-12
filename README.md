@@ -29,7 +29,7 @@ Este projeto é uma Pokédex interativa que consome dados da [PokéAPI](https://
 
 Vizualizar no vercel:
 
-- [PokéAPI](https://pokedex-five-ivory.vercel.app/)
+- [Pokedex](https://pokedex-five-ivory.vercel.app/)
 
 Clonar o repositório:
 
