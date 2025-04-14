@@ -23,11 +23,11 @@ Este projeto é uma Pokédex interativa que consome dados da [PokéAPI](https://
 - [Vue Router](https://router.vuejs.org/)
 - [PokéAPI](https://pokeapi.co/)
 
-## 🔧 Como Rodar o Projeto ou Vizualizar
+## 🔧 Como Rodar o Projeto ou Visualizar
 
 
 
-Vizualizar no vercel:
+Visualizar no vercel:
 
 - [Pokedex](https://pokedex-five-ivory.vercel.app/)
 
