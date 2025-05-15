@@ -40,9 +40,9 @@ const { t } = useI18n()
 .back-button {
   position: absolute;
   left: 0;
-  background-color: #f44336;
-  color: white;
-  border: none;
+  background-color: none ;
+  color: black;
+  border: 3px solid #1f1f1f;
   border-radius: 6px;
   padding: 0.5rem 1rem;
   cursor: pointer;
