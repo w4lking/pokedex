@@ -1,80 +1,54 @@
+<script setup lang="ts">
+import { ref, onMounted, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { translateType } from '@/utils/translateType'
+import { usePokemonList } from '@/composables/usePokemonList'
+
+const { t } = useI18n()
+
+const { pokemons, fetchPokemons, loading } = usePokemonList()
+
+const search = ref('')
+
+onMounted(fetchPokemons)
+
+const filteredPokemons = computed(() => {
+  if (!search.value) return pokemons.value
+  const s = search.value.toLowerCase()
+  return pokemons.value.filter((p) =>
+    p.name.toLowerCase().includes(s) || String(p.id).includes(s)
+  )
+})
+
+function onImageError(event: Event) {
+  (event.target as HTMLImageElement).src = '/pokebola.avif'
+}
+
+</script>
+
+
 <template>
   <div class="pokemon-list">
-
-    <!-- input de busca -->
     <input v-model="search" :placeholder="t('search')" />
 
-    <!-- lista de pokémons -->
     <TransitionGroup name="fade" tag="div" class="grid">
       <router-link
-        v-for="pokemon in filteredPokemons" :key="pokemon.name" :to="{ name: 'PokemonDetail', params: { name: pokemon.name } }" class="card"
-        :class="pokemon.types[0]">
-        <img :src="pokemon.image" alt="pokemon" />
+        v-for="pokemon in filteredPokemons"
+        :key="pokemon.id"
+        :to="{ name: 'PokemonDetail', params: { name: pokemon.name } }"
+        class="card"
+        :class="pokemon.types[0]"
+      >
+        <img :src="pokemon.sprites.front_default" @error="onImageError" :alt="`Imagem de ${pokemon.name}`" />
         <p>{{ pokemon.name }}</p>
         <span class="badge">{{ translateType(pokemon.types[0]) }}</span>
       </router-link>
     </TransitionGroup>
 
-    <!-- loading -->
     <div v-if="loading" class="loading">{{ $t('loading') }}</div>
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
-import axios from 'axios'
-import { useI18n } from 'vue-i18n'
-import { translateType } from '@/utils/translateType'
-
-const { t } = useI18n()
-
-const pokemons = ref<any[]>([])
-const offset = ref(0)
-const limit = 50
-const loading = ref(false)
-const search = ref('')
-
-const loadPokemons = async () => {
-  if (loading.value) return
-  loading.value = true
-
-  const res = await axios.get(
-    `https://pokeapi.co/api/v2/pokemon?offset=${offset.value}&limit=${limit}`,
-  )
-  const results = res.data.results
-
-  for (const item of results) {
-    const detail = await axios.get(item.url)
-    pokemons.value.push({
-      name: detail.data.name,
-      id: detail.data.id,
-      image: detail.data.sprites.front_default,
-      types: detail.data.types.map((t: { type: { name: any } }) => t.type.name),
-      species: detail.data.species.name,
-    })
-  }
-
-  offset.value += limit
-  loading.value = false
-}
-
-onMounted(() => {
-  loadPokemons()
-  window.addEventListener('scroll', onScroll)
-})
-
-const onScroll = () => {
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
-    loadPokemons()
-  }
-}
-
-const filteredPokemons = computed(() => {
-  if (!search.value) return pokemons.value
-  const s = search.value.toLowerCase()
-  return pokemons.value.filter((p) => p.name.includes(s) || String(p.id).includes(s)) 
-})
-</script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');

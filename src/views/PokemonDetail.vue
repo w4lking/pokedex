@@ -1,19 +1,3 @@
-<template>
-  <div class="detail-container" v-if="pokemon">
-    <PokemonHeader :pokemon="pokemon" />
-    <SpritesSection :sprites="filteredSprites" />
-    <MovesSection :moves="firstMoves" />
-    <GamesSection :games="pokemon.game_indices" />
-    <EvolutionsSection
-      v-if="evolutions.length"
-      :evolutions="evolutions"
-      :currentPokemon="pokemon.name"
-    />
-  </div>
-
-  <div v-else class="loading-detail">Carregando detalhes...</div>
-</template>
-
 <script setup>
 // Vue
 import { ref, computed, onMounted } from 'vue'
@@ -70,6 +54,23 @@ const firstMoves = computed(() => pokemon.value?.moves.slice(0, 10) || [])
 
 onMounted(fetchPokemonDetails)
 </script>
+
+
+<template>
+  <div class="detail-container" v-if="pokemon">
+    <PokemonHeader :pokemon="pokemon" />
+    <SpritesSection :sprites="filteredSprites" />
+    <MovesSection :moves="firstMoves" />
+    <GamesSection :games="pokemon.game_indices" />
+    <EvolutionsSection
+      v-if="evolutions.length"
+      :evolutions="evolutions"
+      :currentPokemon="pokemon.name"
+    />
+  </div>
+
+  <div v-else class="loading-detail">Carregando detalhes...</div>
+</template>
 
 <style scoped>
 .detail-container {
