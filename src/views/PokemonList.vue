@@ -1,21 +1,21 @@
 <template>
   <div class="pokemon-list">
+
+    <!-- input de busca -->
     <input v-model="search" :placeholder="t('search')" />
 
+    <!-- lista de pokémons -->
     <TransitionGroup name="fade" tag="div" class="grid">
       <router-link
-        v-for="pokemon in filteredPokemons"
-        :key="pokemon.name"
-        :to="{ name: 'PokemonDetail', params: { name: pokemon.name } }"
-        class="card"
-        :class="pokemon.types[0]"
-      >
+        v-for="pokemon in filteredPokemons" :key="pokemon.name" :to="{ name: 'PokemonDetail', params: { name: pokemon.name } }" class="card"
+        :class="pokemon.types[0]">
         <img :src="pokemon.image" alt="pokemon" />
         <p>{{ pokemon.name }}</p>
         <span class="badge">{{ translateType(pokemon.types[0]) }}</span>
       </router-link>
     </TransitionGroup>
 
+    <!-- loading -->
     <div v-if="loading" class="loading">{{ $t('loading') }}</div>
   </div>
 </template>
