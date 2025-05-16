@@ -1,33 +1,31 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { translateType } from '@/utils/translateType'
-import { usePokemonList } from '@/composables/usePokemonList'
+import { ref, onMounted, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { translateType } from '@/utils/translateType';
+import { usePokemonList } from '@/composables/usePokemonList';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const { pokemons, fetchPokemons, loading } = usePokemonList()
+const { pokemons, fetchPokemons, loading } = usePokemonList();
 
-const search = ref('')
+const search = ref('');
 
-onMounted(fetchPokemons)
+onMounted(fetchPokemons);
 
 const filteredPokemons = computed(() => {
-  if (!search.value) return pokemons.value
-  const s = search.value.toLowerCase()
+  if (!search.value) return pokemons.value;
+  const s = search.value.toLowerCase();
   return pokemons.value.filter((p) =>
     p.name.toLowerCase().includes(s) ||
     String(p.id).includes(s) ||
-    p.types.some(type => type.name.toLowerCase().includes(s))
+    p.types.some(type => type.toLowerCase().includes(s))
   );
-})
+});
 
 function onImageError(event: Event) {
-  (event.target as HTMLImageElement).src = '/pokebola.avif'
+  (event.target as HTMLImageElement).src = '/pokebola.avif';
 }
-
 </script>
-
 
 <template>
   <div class="pokemon-list">
@@ -39,14 +37,14 @@ function onImageError(event: Event) {
         :key="pokemon.id"
         :to="{ name: 'PokemonDetail', params: { name: pokemon.name } }"
         class="card"
-        :class="pokemon.types[0]">
-        <img :src="pokemon.sprites.front_default" @error="onImageError" :alt="`Imagem de ${pokemon.name}`" />
+        :class="pokemon.types?.[0] || 'default-class'">
+        <img :src="pokemon.sprites?.front_default || '/pokebola.avif'" @error="onImageError" :alt="`Imagem de ${pokemon.name}`" />
         <p>{{ pokemon.name }}</p>
-        <span class="badge">{{ translateType(pokemon.types[0]) }}</span>
+        <span class="badge">{{ translateType(pokemon.types?.[0] || 'unknown') }}</span>
       </router-link>
     </TransitionGroup>
 
-    <div v-if="loading" class="loading">{{ $t('loading') }}</div>
+    <div v-if="loading" class="loading">{{ t('loading') }}</div>
   </div>
 </template>
 

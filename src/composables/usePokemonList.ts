@@ -2,7 +2,7 @@ import { ref } from 'vue';
 
 export function usePokemonList() {
     // Definição das variáveis reativas
-    const pokemons = ref<{ id: number; name: string; url: string }[]>([]);
+    const pokemons = ref<{ id: number; name: string; url: string; sprites: any; types: string[] }[]>([]);
     const limit = 20;
     const offset = ref(0);
     const loading = ref(false);
@@ -17,7 +17,13 @@ export function usePokemonList() {
             const detailed = await Promise.all(data.results.map(async (pokemon: any) => {
                 const res = await fetch(pokemon.url);
                 const data = await res.json();
-                return { id: data.id, name: data.name, url: pokemon.url, sprites: data.sprites, types: data.types.map((type: any) => type.type.name),};
+                return { 
+                    id: data.id, 
+                    name: data.name, 
+                    url: pokemon.url, 
+                    sprites: data.sprites, 
+                    types: data.types.map((type: any) => type.type.name),
+                };
             }));
             pokemons.value = [...pokemons.value, ...detailed];
             offset.value += limit;
@@ -28,7 +34,6 @@ export function usePokemonList() {
         }
     };
 
-    // 🔥 Esse retorno é essencial!
     return {
         pokemons,
         fetchPokemons,
