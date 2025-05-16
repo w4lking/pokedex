@@ -16,8 +16,10 @@ const filteredPokemons = computed(() => {
   if (!search.value) return pokemons.value
   const s = search.value.toLowerCase()
   return pokemons.value.filter((p) =>
-    p.name.toLowerCase().includes(s) || String(p.id).includes(s)
-  )
+    p.name.toLowerCase().includes(s) ||
+    String(p.id).includes(s) ||
+    p.types.some(type => type.name.toLowerCase().includes(s))
+  );
 })
 
 function onImageError(event: Event) {
@@ -37,8 +39,7 @@ function onImageError(event: Event) {
         :key="pokemon.id"
         :to="{ name: 'PokemonDetail', params: { name: pokemon.name } }"
         class="card"
-        :class="pokemon.types[0]"
-      >
+        :class="pokemon.types[0]">
         <img :src="pokemon.sprites.front_default" @error="onImageError" :alt="`Imagem de ${pokemon.name}`" />
         <p>{{ pokemon.name }}</p>
         <span class="badge">{{ translateType(pokemon.types[0]) }}</span>
